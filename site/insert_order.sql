@@ -113,7 +113,7 @@ BEGIN
 		else
 			update product set product_quantity = product_quantity - product_qnt2 where product_id = product_id2;
 		end if;
-		--commit;
+		commit;
 		DBMS_OUTPUT.PUT_LINE('Order Processed!');
 		
 		PC_PARTS_PACKAGE.GENERATE_BILL(order_idd);
