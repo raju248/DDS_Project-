@@ -1,0 +1,1 @@
+@H:\Md Shah Faisal Raju\Study Materials\4.1\DDS\Lab\Project\insert_product.sql

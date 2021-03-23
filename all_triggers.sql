@@ -1,0 +1,69 @@
+SET SERVEROUTPUT ON;
+SET VERIFY OFF;
+
+
+CREATE OR REPLACE TRIGGER ORDER_PLACED
+AFTER INSERT
+ON ORDERS
+FOR EACH ROW
+DECLARE
+
+BEGIN
+	DBMS_OUTPUT.PUT_LINE('Trigger : ORDER PLACED FOR ' || :new.customer_name);
+END;
+/
+
+
+
+CREATE OR REPLACE TRIGGER PRODUCT_ADDED_TO_ORDER
+AFTER INSERT
+ON ORDER_PRODUCT
+FOR EACH ROW
+DECLARE
+	product_name product.product_name%TYPE;
+BEGIN
+	SELECT product_name into product_name from product where product.product_id = :new.product_id;
+	DBMS_OUTPUT.PUT_LINE('PRODUCT ID ' || product_name || ' ADDED TO ORDER.');
+END;
+/
+
+
+
+CREATE OR REPLACE TRIGGER PRODUCT_QUANTITY_UPDATED
+AFTER UPDATE
+OF PRODUCT_QUANTITY
+ON PRODUCT
+FOR EACH ROW
+DECLARE
+
+BEGIN
+	DBMS_OUTPUT.PUT_LINE('Trigger : Product ' || :old.product_name || ' quantity changed to ' 
+									|| :new.product_quantity  || ' from ' || :old.product_quantity);
+END;
+/
+
+
+
+CREATE OR REPLACE TRIGGER SUPPLIER_ADDED
+AFTER INSERT
+ON SUPPLIER
+FOR EACH ROW
+DECLARE
+
+BEGIN
+	DBMS_OUTPUT.PUT_LINE('Trigger : SUPPLIER ADDED : ' || :new.S_NAME);
+END;
+/
+
+
+CREATE OR REPLACE TRIGGER PRODUCT_ADDED
+AFTER INSERT
+ON PRODUCT
+FOR EACH ROW
+DECLARE
+
+BEGIN
+	DBMS_OUTPUT.PUT_LINE('Trigger : PRODUCT ADDED : ' || :new.product_name);
+END;
+/
+
